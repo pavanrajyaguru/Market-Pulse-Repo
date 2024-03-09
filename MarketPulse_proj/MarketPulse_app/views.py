@@ -11,11 +11,10 @@ def home(request):
 
 @csrf_exempt
 def auth_user(request):
-    email = request.POST.get("email",None)
-    password = request.POST.get("password",None)
-    print(request,"req_post")
-    print(email,"email")
-    print(password,"password")
+    post_data = json.loads(request.body)
+    email = post_data["email"]
+    password = post_data["password"]
+
     if email != None and password != None:
         user_obj = User.objects.filter(email = email,password = password).values()
         if len(user_obj) > 0 :
