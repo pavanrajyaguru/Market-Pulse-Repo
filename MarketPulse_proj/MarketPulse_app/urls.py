@@ -6,4 +6,5 @@ urlpatterns = [
     path("getindices",views.get_indices),
     path("get_running_status",views.get_running_status),
     path("auth_user",views.auth_user),
+    
 ]

@@ -5,3 +5,11 @@
   margin: auto;
   margin-top: 200px;
  }
+
+ .container-card{
+    justify-items: center;
+    margin-top: 200px;
+    margin-left: 60px;
+      
+ }
+ 

@@ -1,5 +1,5 @@
 import React from 'react';
-import { Form, Input, Button, Checkbox } from 'antd';
+import { Form, Input, Button, Select} from 'antd';
 import '../App.css';
 const Register = () => {
   const onFinish = (values) => {
@@ -30,7 +30,15 @@ const Register = () => {
         <Input />
       </Form.Item>
 
-
+      <Form.Item
+        label="Email"
+        name="email"
+        rules={[{ 
+            required: true, 
+            message: 'Please input your email!' }]}
+      >
+        <Input />
+      </Form.Item>
 
 
       <Form.Item
@@ -41,6 +49,21 @@ const Register = () => {
             message: 'Please input your password!' }]}
       >
         <Input.Password />
+      </Form.Item>
+
+      <Form.Item
+        label="Gender"
+        name="gender"
+        rules={[{ 
+            required: true, 
+            message: 'Please enter your gender!' }]}
+      >
+         <Select placeholder="Select gender">
+         <option value="">Select</option>
+            <option value="male">Male</option>
+            <option value="female">Female</option>
+          </Select>
+
       </Form.Item>
 
       {/* <Form.Item name="remember" valuePropName="checked">

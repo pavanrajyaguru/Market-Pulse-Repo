@@ -6,14 +6,10 @@ const Login = () => {
   const onFinish = async(values) => {
     try{
         console.log('Received values:', values);
-    const response = axios.post('auth_user', JSON.stringify(values), {
-        headers: {
-          'Content-Type': 'application/json',
-        },
-      });
-    console.log(response,"response.data")
+    const response = await axios.post(`/auth_user`, values)
+    // console.log(response,"response.data")
     const data = await response.json();
-      console.log(data);
+      console.log(data,"data");
     }
     catch(error){
         console.log(error)
