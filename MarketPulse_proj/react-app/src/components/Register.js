@@ -1,9 +1,14 @@
 import React from 'react';
 import { Form, Input, Button, Select} from 'antd';
 import '../App.css';
+import axios from "axios";
+
 const Register = () => {
-  const onFinish = (values) => {
+  const onFinish = async (values) => {
     console.log('Received values:', values);
+    const response = await axios.post(`/register_action`, values)
+    const data = await response.json();
+    console.log("data", data);
   };
 
   const onFinishFailed = (errorInfo) => {

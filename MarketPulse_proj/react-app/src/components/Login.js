@@ -7,7 +7,6 @@ const Login = () => {
     try{
         console.log('Received values:', values);
     const response = await axios.post(`/auth_user`, values)
-    // console.log(response,"response.data")
     const data = await response.json();
       console.log(data,"data");
     }
