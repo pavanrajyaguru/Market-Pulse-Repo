@@ -2,7 +2,7 @@ import React from 'react';
 import { Form, Input, Button, Select} from 'antd';
 import '../App.css';
 import axios from "axios";
-
+import { NavLink } from 'react-router-dom';
 const Register = () => {
   const onFinish = async (values) => {
     console.log('Received values:', values);
@@ -80,6 +80,9 @@ const Register = () => {
           Submit
         </Button>
       </Form.Item>
+      <p>Already have an account?
+      <NavLink to="/login">Login</NavLink>
+      </p>
     </Form>
     </div>
   );

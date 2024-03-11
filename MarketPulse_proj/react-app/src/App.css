@@ -8,8 +8,16 @@
 
  .container-card{
     justify-items: center;
-    margin-top: 200px;
+    margin-top: 60px;
     margin-left: 60px;
-      
+    margin: auto;
+ }
+
+ .container-nav{
+   padding-top: 20px;
+   padding-left: 1700px;
+   height: 50px;
+   width: auto;
+   border: 2px solid black;
  }
  

@@ -43,10 +43,12 @@ def auth_user(request):
         user_obj = User.objects.filter(email = email).values()
         if len(user_obj) > 0 :
             if check_password(password,user_obj[0]["password"]):
-                return HttpResponse("Login Successfull")
-        return HttpResponse("Incorrect Email or password")
+                response = { "code":1,"msg":"Login Successfull" }
+            else : 
+                response = { "code":0,"msg":"Incorrect Email or password" }
+            return HttpResponse(json.dumps(response))
         
-    return HttpResponse("Email and Password not found")
+    return HttpResponse(json.dumps({ "code":0,"msg":"Email and Password not found" }))
         
 @csrf_exempt
 def get_indices(request):
