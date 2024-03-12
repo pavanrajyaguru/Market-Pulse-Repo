@@ -39,7 +39,13 @@ const Cards = () => {
                         <Spin size="large" />
                     </div>
                 ) :
-                    (<Space direction="horizontal" size={5}>
+                    (
+                        <>
+                        <div>
+                            <p>See More {ArrowRightOutlined}</p>
+                        </div>
+                    <Space direction="horizontal" size={5}>
+                        
                         {
                             cardTitle.map((ele, index) => {
                                 // console.log(ele.meta,"[index].meta")
@@ -47,13 +53,13 @@ const Cards = () => {
                                     <>
                                         <Card
                                             size="small"
-                                            title={ele.symbol}
+                                            title={ele.meta.companyName}
                                             //   extra={<a href="#">More</a>}
                                             style={{ width: 170, height: 200 }}
                                         >
                                             <p>{ele.lastPrice}</p>
                                             {/* <p>{ele.lastUpdatTime}</p> */}
-                                           <p>{ele.meta.companyName}</p>
+                                            <p>{ele.symbol}</p>
                                            <p>{ele.pChange}</p>
                                             {/* <p>{ele.series}</p>
                                             <p>{ele.dayHigh}</p>
@@ -70,6 +76,8 @@ const Cards = () => {
                             <Button type="text" icon={<ArrowRightOutlined />} onClick={handleModalOpen} />
                         </div>
                     </Space>
+                    </>
+                    
                     )}
 
             </div>

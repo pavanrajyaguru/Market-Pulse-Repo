@@ -68,7 +68,7 @@ const Login = () => {
     //   initialValues={{ remember: true }}
       onFinish={onFinish}
       onFinishFailed={onFinishFailed}
-      style={{ width: '300px', margin: 'auto', marginTop: '50px' }}
+      style={{ width: '300px', margin: 'auto', marginTop: '70px' }}
     >
       <Form.Item
         label="Email"
