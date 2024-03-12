@@ -40,42 +40,43 @@ const Cards = () => {
                     </div>
                 ) :
                     (
-                        <>
-                        <div>
-                            <p>See More {ArrowRightOutlined}</p>
-                        </div>
-                    <Space direction="horizontal" size={5}>
-                        
-                        {
-                            cardTitle.map((ele, index) => {
-                                // console.log(ele.meta,"[index].meta")
-                                return (
-                                    <>
-                                        <Card
-                                            size="small"
-                                            title={ele.meta.companyName}
-                                            //   extra={<a href="#">More</a>}
-                                            style={{ width: 170, height: 200 }}
-                                        >
-                                            <p>{ele.lastPrice}</p>
-                                            {/* <p>{ele.lastUpdatTime}</p> */}
-                                            <p>{ele.symbol}</p>
-                                           <p>{ele.pChange}</p>
-                                            {/* <p>{ele.series}</p>
-                                            <p>{ele.dayHigh}</p>
-                                            <p>{ele.yearHigh}</p>
-                                            <p>{ele.yearLow}</p> */}
+                    <>
+                       <div style={{float: 'right'}}>
+                            <Button>See More </Button>
+                       </div>
+                            
+                            <Space direction="horizontal" size={5}>
+                                
+                                {
+                                    cardTitle.map((ele) => {
+                                        // console.log(ele.meta,"[index].meta")
+                                        return (
+                                            <>
+                                                <Card
+                                                    size="small"
+                                                    title={ele.meta.companyName}
+                                                    style={{ width: 170, height: 200 }}
+                                                >
+                                                    <p>{ele.lastPrice}</p>
+                                                    {/* <p>{ele.lastUpdatTime}</p> */}
+                                                    <p>{ele.symbol}</p>
+                                                    <p>{ele.pChange}</p>
+                                                    {/* <p>{ele.series}</p>
+                                                    <p>{ele.dayHigh}</p>
+                                                    <p>{ele.yearHigh}</p>
+                                                    <p>{ele.yearLow}</p> */}
 
-                                        </Card>
+                                                </Card>
 
-                                    </>
-                                )
-                            })
-                        }
-                        <div style={{ marginTop: '10px', textAlign: 'center' }}>
-                            <Button type="text" icon={<ArrowRightOutlined />} onClick={handleModalOpen} />
-                        </div>
-                    </Space>
+                                            </>
+                                        )
+                                    })
+                                }
+                                <div style={{ marginTop: '10px', textAlign: 'center' }}>
+                                    <Button type="text" icon={<ArrowRightOutlined />} onClick={handleModalOpen} />
+                                </div>
+                            </Space>
+                    
                     </>
                     
                     )}
