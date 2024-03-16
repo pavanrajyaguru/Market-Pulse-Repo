@@ -53,9 +53,9 @@ def auth_user(request):
 @csrf_exempt
 def get_indices(request):
     positions = nsefetch('https://www.nseindia.com/api/equity-stockIndices?index=SECURITIES%20IN%20F%26O')
-    
-    start = request.POST.get("start",0)
-    end = request.POST.get("end",10)
+    post_data = json.loads(request.body)
+    start = post_data.get("start",0)
+    end = post_data.get("end",10)
   
     response = positions["data"][int(start):int(end)]
     
