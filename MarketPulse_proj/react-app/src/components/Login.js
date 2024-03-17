@@ -7,7 +7,7 @@ import {useNavigate} from 'react-router-dom';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 const Login = () => {
-  const history = useNavigate();
+  const navigate = useNavigate();
   const onFinish = async(values) => {
     
     axios.post('/auth_user', values)
@@ -17,7 +17,7 @@ const Login = () => {
       if(response.data.code == 1){
 
         handleToast("success",response.data.msg)
-        history('/')
+        navigate('/')
         
       }
       else{
