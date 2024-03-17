@@ -37,7 +37,6 @@ def auth_user(request):
     post_data = json.loads(request.body)
     email = post_data["email"]
     password = post_data["password"]
-    password_hashed = make_password("Diya@2753")
 
     if email != None and password != None:
         user_obj = User.objects.filter(email = email).values()
@@ -58,8 +57,16 @@ def get_indices(request):
     end = post_data.get("end",10)
   
     response = positions["data"][int(start):int(end)]
-    
     return HttpResponse(json.dumps(response))
 
 def get_running_status(request):
     return HttpResponse(str(running_status()))
+
+def overview(request):
+    return render(request,"index.html")
+
+def get_overview(request,index):
+    
+    data = nse_fno(index)
+    return HttpResponse(json.dumps(data))
+    # return render(request,"index.html")

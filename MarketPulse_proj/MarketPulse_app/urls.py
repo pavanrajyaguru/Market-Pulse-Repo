@@ -11,5 +11,7 @@ urlpatterns = [
     
     path("getindices",views.get_indices),
     path("get_running_status",views.get_running_status),
+    path("overview",views.overview),
+    path("get_overview/<index>/",views.get_overview)
     
 ]

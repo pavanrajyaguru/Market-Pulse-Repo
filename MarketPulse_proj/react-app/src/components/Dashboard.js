@@ -49,12 +49,17 @@ const Dashboard = () => {
                             <>
                                 <div className='col-lg-12'>
 
-                                    <div className='col-lg-12 mr-3' >
-                                        <Button style={{ float: 'right' ,position:'static'}}>Primary</Button>
-                                    </div>
-                                    <div className='col-lg-12 mr-3' >
-                                        <Button style={{ float: 'right' ,position:'static'}}>Watch List</Button>
-                                    </div>
+                                   <div className='row'>
+                                        <div className='col-lg-8'>
+
+                                        </div>
+                                        <div className='col-lg-2 m-3' >
+                                            <Button style={{ float: 'right' ,position:'static'}}>Primary</Button>
+                                        </div>
+                                        <div className='col-lg-2 m-3' >
+                                            <Button style={{ float: 'right' ,position:'static'}}>Watch List</Button>
+                                        </div>
+                                   </div>
                                     <div className='col-lg-12'>
                                         <Cards response={response} loading={loading}/>
                                     </div>
