@@ -50,14 +50,12 @@ const Dashboard = () => {
                                 <div className='col-lg-12'>
 
                                    <div className='row'>
-                                        <div className='col-lg-8'>
+                                        <div className='col-lg-6'>
 
                                         </div>
-                                        <div className='col-lg-2 m-3' >
-                                            <Button style={{ float: 'right' ,position:'static'}}>Primary</Button>
-                                        </div>
-                                        <div className='col-lg-2 m-3' >
-                                            <Button style={{ float: 'right' ,position:'static'}}>Watch List</Button>
+                                        <div className='col-lg-6 watchlist ' >
+                                            <Button style={{position:'static'}}>Primary</Button>
+                                            <Button style={{position:'static'}}>Watch List</Button>
                                         </div>
                                    </div>
                                     <div className='col-lg-12'>

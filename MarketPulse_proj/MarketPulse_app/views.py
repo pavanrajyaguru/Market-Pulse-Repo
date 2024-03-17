@@ -4,6 +4,7 @@ from django.views.decorators.csrf import csrf_exempt
 from nsepython import *
 from django.contrib.auth.hashers import make_password, check_password
 from .models import *
+from pprint import pprint
 # Create your views here.
 
 def home(request):
@@ -43,11 +44,41 @@ def auth_user(request):
         if len(user_obj) > 0 :
             if check_password(password,user_obj[0]["password"]):
                 response = { "code":1,"msg":"Login Successfull" }
+                request.session["id"] = user_obj[0]["id"]
+                request.session["name"] = user_obj[0]["name"]
+                request.session["email"] = user_obj[0]["email"]
+                request.session["gender"] = user_obj[0]["gender"]
             else : 
                 response = { "code":0,"msg":"Incorrect Email or password" }
             return HttpResponse(json.dumps(response))
         
     return HttpResponse(json.dumps({ "code":0,"msg":"Email and Password not found" }))
+        
+def is_login(request):
+    
+    response = {
+        "code" : 0,
+        "data" : {}
+    }
+    
+    if "id" in request.session:
+        response["code"] = 1
+        response["data"]["id"] = request.session["id"]
+        response["data"]["name"] = request.session["name"]
+        response["data"]["email"] = request.session["email"]
+        response["data"]["gender"] = request.session["gender"]
+    
+    return HttpResponse(json.dumps(response))
+
+def logout(request):
+    try:
+        del request.session['id']
+        del request.session['name']
+        del request.session['email']
+        del request.session['gender']
+    except KeyError:
+        pass
+    return HttpResponse("Logout Successfull")
         
 @csrf_exempt
 def get_indices(request):
@@ -55,7 +86,11 @@ def get_indices(request):
     post_data = json.loads(request.body)
     start = post_data.get("start",0)
     end = post_data.get("end",10)
-  
+    
+    # events = nse_events()
+    # circular = nse_circular(mode="latest")
+    # quote = nsetools_get_quote("IBM")
+    
     response = positions["data"][int(start):int(end)]
     return HttpResponse(json.dumps(response))
 
@@ -67,6 +102,9 @@ def overview(request):
 
 def get_overview(request,index):
     
-    data = nse_fno(index)
+    # data = nse_fno(index)
+    data = nse_quote(index)
+    # data = nsetools_get_quote(index)
+    pprint(data)
     return HttpResponse(json.dumps(data))
     # return render(request,"index.html")

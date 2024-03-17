@@ -34,7 +34,7 @@ const Accordion_table = ({response}) => {
             </ul>
 
             <NavLink to={`/overview`}>
-            <Button className='btn btn-primary' >See Overview</Button>            
+            <Button className='btn btn-primary m-0 pt-0 pb-0' >See Overview</Button>            
             </NavLink>
             
           </Panel>
@@ -56,7 +56,7 @@ const Accordion_table = ({response}) => {
               <li>DayHigh : {ele.yearHigh}<br /></li>
             </ul>
             <NavLink to={`/overview`}>
-            <Button className='btn btn-primary' >See Overview</Button>            
+            <Button className='btn btn-primary m-0 pt-0 pb-0' >See Overview</Button>            
             </NavLink>
             
           </Panel>
