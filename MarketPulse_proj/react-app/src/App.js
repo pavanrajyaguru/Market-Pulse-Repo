@@ -1,32 +1,26 @@
-import React, { useState } from 'react'
+import React, { useState ,useEffect} from 'react'
 import Login from './components/Login'
 import Register from './components/Register'
 import {BrowserRouter as Router , Routes,Route} from "react-router-dom"
 import Header from './components/Header'
 import Dashboard from './components/Dashboard'
 import Overview from './components/Overview'
-import ProtectedRoute from './components/ProtectedRoute'
+import MainApp from './components/MainApp'
+import { ToastContainer } from 'react-toastify'
+
 const App = () => {
   
+
   return (
     <>
     <div className='container-fluid'>
-
-
+    <ToastContainer />
     <Router>
-      <Header/>
       <Routes>
-        <Route path='/login' element={<Login />}/>
-        <Route path='/register' element={<Register />}/>
-        
-        <Route path='/' element={<Dashboard />}/>
-        <Route path='/overview/:symbol' element={<Overview />}/>
-
+        <Route path='*' element={<MainApp />}/>
       </Routes>
     </Router>
     </div>
-    
-   
     </>
   )
 }

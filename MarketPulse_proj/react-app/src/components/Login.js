@@ -1,5 +1,5 @@
 import React from 'react';
-import { Form, Input, Button, Checkbox } from 'antd';
+import { Form, Input, Button} from 'antd';
 import '../App.css';
 import axios from "axios";
 import { NavLink } from 'react-router-dom';
@@ -8,17 +8,20 @@ import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 const Login = () => {
   const navigate = useNavigate();
+  
   const onFinish = async(values) => {
     
     axios.post('/auth_user', values)
     .then(function (response) {
       // console.log('Success!', response.data);
       console.log(response.data.code)
+      console.log(response.data.data.name)
       if(response.data.code == 1){
-
-        handleToast("success",response.data.msg)
-        navigate('/')
-        
+        toast.success("Heyyy")
+        localStorage.setItem("authUser",JSON.stringify(response.data.data))
+        handleToast("success","Hello")
+        navigate('/dashboard')
+        // window.location.reload();
       }
       else{
         handleToast("fail",response.data.msg)
@@ -36,7 +39,6 @@ const Login = () => {
       toast.success(msg,{
         position:'bottom-right',
         bodyStyle:{
-          
           color : "green"
         }
       });

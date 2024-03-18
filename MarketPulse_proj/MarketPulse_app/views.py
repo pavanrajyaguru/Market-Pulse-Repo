@@ -41,15 +41,16 @@ def auth_user(request):
 
     if email != None and password != None:
         user_obj = User.objects.filter(email = email).values()
+        print(user_obj[0],"user")
         if len(user_obj) > 0 :
             if check_password(password,user_obj[0]["password"]):
-                response = { "code":1,"msg":"Login Successfull" }
+                response = { "code":1,"msg":"Login Successfull" ,"data":user_obj[0]}
                 request.session["id"] = user_obj[0]["id"]
                 request.session["name"] = user_obj[0]["name"]
                 request.session["email"] = user_obj[0]["email"]
                 request.session["gender"] = user_obj[0]["gender"]
             else : 
-                response = { "code":0,"msg":"Incorrect Email or password" }
+                response = { "code":0,"msg":"Incorrect Email or password"}
             return HttpResponse(json.dumps(response))
         
     return HttpResponse(json.dumps({ "code":0,"msg":"Email and Password not found" }))
@@ -83,9 +84,11 @@ def logout(request):
 @csrf_exempt
 def get_indices(request):
     positions = nsefetch('https://www.nseindia.com/api/equity-stockIndices?index=SECURITIES%20IN%20F%26O')
+    print(positions,"pos")
     post_data = json.loads(request.body)
     start = post_data.get("start",0)
     end = post_data.get("end",10)
+    
     
     # events = nse_events()
     # circular = nse_circular(mode="latest")
