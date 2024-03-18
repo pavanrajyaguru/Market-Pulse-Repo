@@ -6,15 +6,13 @@ import Header from './components/Header'
 import Dashboard from './components/Dashboard'
 import Overview from './components/Overview'
 import MainApp from './components/MainApp'
-import { ToastContainer } from 'react-toastify'
-
 const App = () => {
   
 
   return (
     <>
     <div className='container-fluid'>
-    <ToastContainer />
+
     <Router>
       <Routes>
         <Route path='*' element={<MainApp />}/>

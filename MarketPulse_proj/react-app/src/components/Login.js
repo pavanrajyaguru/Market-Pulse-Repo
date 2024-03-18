@@ -15,16 +15,16 @@ const Login = () => {
     .then(function (response) {
       // console.log('Success!', response.data);
       console.log(response.data.code)
-      console.log(response.data.data.name)
+      // console.log(response.data.data.name)
       if(response.data.code == 1){
-        toast.success("Heyyy")
         localStorage.setItem("authUser",JSON.stringify(response.data.data))
-        handleToast("success","Hello")
+        handleToast("success",response.data.msg)
         navigate('/dashboard')
         // window.location.reload();
       }
       else{
         handleToast("fail",response.data.msg)
+        console.log("hy my name is diya")
       }
       
     })

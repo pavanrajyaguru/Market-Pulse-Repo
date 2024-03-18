@@ -7,7 +7,6 @@ import Header from './Header'
 import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom'
 import AuthRoute from './AuthRoute'
 import ProtectedRoute from './ProtectedRoute'
-
 const MainApp = () => {
     return (
 
