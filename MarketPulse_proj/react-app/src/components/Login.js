@@ -4,11 +4,13 @@ import '../App.css';
 import axios from "axios";
 import { NavLink } from 'react-router-dom';
 import {useNavigate} from 'react-router-dom';
-import { ToastContainer, toast } from 'react-toastify';
+import {  toast } from 'react-toastify';
+import { useDispatch } from 'react-redux';
+import { login } from './redux/actions/Actions';
 import 'react-toastify/dist/ReactToastify.css';
 const Login = () => {
   const navigate = useNavigate();
-  
+  const dispatch = useDispatch();
   const onFinish = async(values) => {
     
     axios.post('/auth_user', values)
@@ -17,11 +19,15 @@ const Login = () => {
       console.log(response.data.code)
       // console.log(response.data.data.name)
       if(response.data.code == 1){
-        localStorage.setItem("authUser",JSON.stringify(response.data.data))
         handleToast("success",response.data.msg)
-        setTimeout(() => {
-          navigate('/dashboard');
-        }, 2000); 
+        localStorage.setItem("authUser",JSON.stringify(response.data.data))
+        console.log(response.data.data,"res.data.data",response.data.code,"code")
+        dispatch(login(response.data.data))
+        console.log(response.data.msg)
+        setTimeout(()=>{
+          navigate('/dashboard')
+        },2000)
+        
         // window.location.reload();
       }
       else{
@@ -108,7 +114,7 @@ const Login = () => {
       </p>
       
     </Form>
-    <ToastContainer />
+    
     </div>
   );
 };

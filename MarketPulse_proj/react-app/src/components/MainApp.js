@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import Dashboard from './Dashboard'
 import Overview from './Overview'
 import Register from './Register'
@@ -7,10 +7,14 @@ import Header from './Header'
 import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom'
 import AuthRoute from './AuthRoute'
 import ProtectedRoute from './ProtectedRoute'
+import { ToastContainer } from 'react-toastify'
+import axios  from 'axios'
 const MainApp = () => {
+    
     return (
 
         <div className="container-fluid">
+    <ToastContainer />
 
             <Header />
             <Routes>

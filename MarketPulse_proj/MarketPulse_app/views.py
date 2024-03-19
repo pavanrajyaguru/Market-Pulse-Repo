@@ -71,6 +71,8 @@ def is_login(request):
     
     return HttpResponse(json.dumps(response))
 
+
+    
 def logout(request):
     try:
         del request.session['id']
