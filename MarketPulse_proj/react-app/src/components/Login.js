@@ -19,7 +19,9 @@ const Login = () => {
       if(response.data.code == 1){
         localStorage.setItem("authUser",JSON.stringify(response.data.data))
         handleToast("success",response.data.msg)
-        navigate('/dashboard')
+        setTimeout(() => {
+          navigate('/dashboard');
+        }, 2000); 
         // window.location.reload();
       }
       else{
