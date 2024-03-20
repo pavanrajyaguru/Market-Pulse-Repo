@@ -1,9 +1,10 @@
 import React, { useState } from 'react';
 import { NavLink } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-import { logout } from './redux/actions/Actions';
+import { logout ,handleToast } from './redux/actions/Actions';
 import { useNavigate } from 'react-router-dom';
 import { Dropdown, Menu,Button } from 'antd';
+import axios from 'axios';
 
 const Header = () => {
   const dispatch = useDispatch();
@@ -11,9 +12,19 @@ const Header = () => {
   const user = useSelector(state => state.auth.user);
   const [visible, setVisible] = useState(false);
 
-  const handleLogout = () => {
+  const handleLogout = async() => {
     dispatch(logout());
     navigate('/login');
+    localStorage.clear();
+    axios.get('/logout')
+    .then(function(response){
+      console.log(response)
+      dispatch(handleToast("success",response.data))
+    })
+    .catch(function(error){
+      console.log(error)
+    })
+    
   };
 
   const menu = (

@@ -10,8 +10,9 @@ const Cards = ({ response, loading }) => {
     return (
         <>
             <div className='container-card' style={{ maxHeight: '220px', overflowY: 'hidden' }}>
-
+                
                 <Space direction='horizontal' size={5}>
+                
                     {limitedresponse.map((ele) => (
                        <Card size='small' title={ele.meta.companyName} style={{ width: 170, height: 'fit-content' }} key={ele.symbol}>
                        <p>{ele.lastPrice}</p>

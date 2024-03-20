@@ -4,13 +4,15 @@ import '../App.css';
 import axios from "axios";
 import { NavLink } from 'react-router-dom';
 import {useNavigate} from 'react-router-dom';
-import {  toast } from 'react-toastify';
 import { useDispatch } from 'react-redux';
-import { login } from './redux/actions/Actions';
+import { login,handleToast } from './redux/actions/Actions';
 import 'react-toastify/dist/ReactToastify.css';
+
 const Login = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
+  
+
   const onFinish = async(values) => {
     
     axios.post('/auth_user', values)
@@ -19,10 +21,11 @@ const Login = () => {
       console.log(response.data.code)
       // console.log(response.data.data.name)
       if(response.data.code == 1){
-        handleToast("success",response.data.msg)
+        dispatch(handleToast("success",response.data.msg))
         localStorage.setItem("authUser",JSON.stringify(response.data.data))
         console.log(response.data.data,"res.data.data",response.data.code,"code")
         dispatch(login(response.data.data))
+        
         console.log(response.data.msg)
         setTimeout(()=>{
           navigate('/dashboard')
@@ -31,8 +34,8 @@ const Login = () => {
         // window.location.reload();
       }
       else{
-        handleToast("fail",response.data.msg)
-        console.log("hy my name is diya")
+        
+        dispatch(handleToast("error",response.data.msg))
       }
       
     })
@@ -42,31 +45,10 @@ const Login = () => {
     });
 
   };
-  const handleToast = (type,msg) =>{
-    if(type == "success"){
-      toast.success(msg,{
-        position:'bottom-right',
-        bodyStyle:{
-          color : "green"
-        }
-      });
-    }
-    else if(type == "fail"){
-      toast.error(msg,{
-        position:'bottom-right',
-        bodyStyle:{
-          
-          color : "red"
-        }
-      });
-    }
-    
-    
-  }
-
+  
+  
   const onFinishFailed = (errorInfo) => {
-    console.log('Failed:', errorInfo);
-   
+    console.log('Failed:', errorInfo);   
   };
 
   return (

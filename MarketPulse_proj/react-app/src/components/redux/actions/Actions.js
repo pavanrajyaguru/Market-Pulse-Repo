@@ -10,3 +10,10 @@ export const logout = () =>{
         type :"Logout"
     }
 }
+
+export const handleToast = (type,msg) =>{
+    return{
+        type :'handleToast',
+        payload : {type,msg},
+    }
+}
