@@ -5,6 +5,7 @@ from nsepython import *
 from django.contrib.auth.hashers import make_password, check_password
 from .models import *
 from pprint import pprint
+from datetime import datetime
 # Create your views here.
 
 def home(request):
@@ -86,11 +87,9 @@ def logout(request):
 @csrf_exempt
 def get_indices(request):
     positions = nsefetch('https://www.nseindia.com/api/equity-stockIndices?index=SECURITIES%20IN%20F%26O')
-    print(positions,"pos")
     post_data = json.loads(request.body)
     start = post_data.get("start",0)
     end = post_data.get("end",10)
-    
     
     # events = nse_events()
     # circular = nse_circular(mode="latest")
@@ -112,4 +111,15 @@ def get_overview(request,index):
     # data = nsetools_get_quote(index)
     pprint(data)
     return HttpResponse(json.dumps(data))
-    # return render(request,"index.html")
+
+def get_daily_bhav_copy(request):
+    
+    date_today = datetime.today().strftime("%d-%m-%Y")
+    post_data = {}
+    if request.body != b'' :
+        post_data = json.loads(request.body)
+        bhavcopy = get_bhavcopy(post_data.get("bhav_date"))
+    else : 
+        bhavcopy = get_bhavcopy(date_today)
+    
+    return HttpResponse(json.dumps(bhavcopy.to_json(orient='records')))
