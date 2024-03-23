@@ -150,3 +150,12 @@ def get_index_history(request):
 def get_chart_data(request):
     print(get_bhavcopy("22-03-2024"))
     return HttpResponse("hello")
+
+def get_nse_fno_list(request):
+    fno_list = fnolist()
+    print("fno_list", fno_list)
+    # print(nse_eq("JUSTDIAL")['priceInfo']['open'])
+    # print(nse_eq("JUSTDIAL")['priceInfo']['intraDayHighLow']['min'])
+    # print(nse_eq("JUSTDIAL")['priceInfo']['intraDayHighLow']['max'])
+    # print(nse_eq("JUSTDIAL")['priceInfo']['close'])
+    return HttpResponse(json.dumps(fno_list),content_type='application/json')
