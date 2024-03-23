@@ -5,8 +5,7 @@ from nsepython import *
 from django.contrib.auth.hashers import make_password, check_password
 from .models import *
 from pprint import pprint
-from datetime import datetime
-# Create your views here.
+from datetime import datetime, timedelta
 
 def home(request):
     
@@ -90,7 +89,7 @@ def get_indices(request):
     post_data = json.loads(request.body)
     start = post_data.get("start",0)
     end = post_data.get("end",10)
-    
+    print(get_bhavcopy("04-06-2021"))
     # events = nse_events()
     # circular = nse_circular(mode="latest")
     # quote = nsetools_get_quote("IBM")
@@ -112,14 +111,42 @@ def get_overview(request,index):
     pprint(data)
     return HttpResponse(json.dumps(data))
 
+@csrf_exempt
 def get_daily_bhav_copy(request):
     
-    date_today = datetime.today().strftime("%d-%m-%Y")
+    today = datetime.now()
+    weekday = today.weekday()
+    
+    if weekday == 5:  # Saturday
+        adjusted_date = today - timedelta(days=1)
+    elif weekday == 6:  # Sunday
+        adjusted_date = today - timedelta(days=2)
+    else:
+        adjusted_date = today
+    
+    adjusted_date = adjusted_date.strftime("%d-%m-%Y")
+    
     post_data = {}
     if request.body != b'' :
         post_data = json.loads(request.body)
         bhavcopy = get_bhavcopy(post_data.get("bhav_date"))
     else : 
-        bhavcopy = get_bhavcopy(date_today)
+        bhavcopy = get_bhavcopy(adjusted_date)
     
     return HttpResponse(json.dumps(bhavcopy.to_json(orient='records')))
+
+def get_index_history(request):
+    
+    post_data = json.loads(request.body)
+    
+    symbol = post_data["symbol"]
+    start_date = post_data["start_date"]
+    end_date = post_data["end_date"]
+    
+    index_history(symbol,start_date,end_date)
+    
+    return HttpResponse(json.loads())
+
+def get_chart_data(request):
+    print(get_bhavcopy("22-03-2024"))
+    return HttpResponse("hello")

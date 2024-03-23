@@ -16,5 +16,6 @@ urlpatterns = [
     path("overview",views.overview),
     path("get_overview/<index>/",views.get_overview),
     path("get_daily_bhav_copy",views.get_daily_bhav_copy),
+    path("get_chart_data",views.get_chart_data),
     
 ]
